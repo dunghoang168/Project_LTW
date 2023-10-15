@@ -45,7 +45,7 @@ public class ShowCartControll extends HttpServlet {
 					}	
 			}
 		}
-		//t
+		//t2
 		for(int i = 0; i < list.size(); i++ ) {
 			int count = 1 ;
 			for (int j = i + 1 ; j < list.size(); j++) {
