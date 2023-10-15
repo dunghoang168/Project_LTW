@@ -27,6 +27,7 @@ public class DBContext {
 //}
 	
 	String url = "jdbc:sqlserver://DESKTOP-9LNQ1HF\\SQLEXPRESS:1433;databaseName=DataBase1;encrypt=false";
+//	String url = "jdbc:sqlserver://DESKTOP-9LNQ1HF\\SQLEXPRESS:1433;databaseName=test;encrypt=false";
 	String userName = "sa";
 	String password = "dunghoang168";
 

@@ -16,8 +16,17 @@ public class Product {
     private double price;
     private String title;
     private String description;
+    private int amount = 1;
 
-    public Product() {
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public Product() {
     }
 
     public Product(int id, String name, String image, double price, String title, String description) {

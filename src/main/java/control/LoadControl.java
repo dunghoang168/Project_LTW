@@ -1,27 +1,29 @@
 package control;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.DAO;
-import entity.Account;
+import entity.Category;
+import entity.Product;
 
 /**
- * Servlet implementation class LoginControl
+ * Servlet implementation class LoadControl
  */
-@WebServlet(name = "LoginControl" , urlPatterns = {"/login"})
-public class LoginControl extends HttpServlet {
+@WebServlet(urlPatterns = "/load")
+public class LoadControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginControl() {
+    public LoadControl() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +33,14 @@ public class LoginControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		
-		String userName = request.getParameter("user");
-		String password = request.getParameter("pass");
-		
-		DAO dao = new DAO();
-		Account acc = dao.login(userName,password);
-		
-		if(acc == null) {
-			request.setAttribute("mess","Wrong user or password");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-		}else {
-			HttpSession session = request.getSession();
-			session.setAttribute("accSession", acc);			
-			response.sendRedirect("home");
-		}
+		String id = request.getParameter("pid");
+        DAO dao = new DAO();
+        Product p = dao.getProductByID(id);
+        List<Category> listC = dao.getAllCategory();
+
+        request.setAttribute("listCC", listC);
+        request.setAttribute("detail", p);
+        request.getRequestDispatcher("Edit.jsp").forward(request, response);
 	}
 
 	/**

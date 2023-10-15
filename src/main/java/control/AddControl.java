@@ -12,16 +12,16 @@ import dao.DAO;
 import entity.Account;
 
 /**
- * Servlet implementation class LoginControl
+ * Servlet implementation class AddControl
  */
-@WebServlet(name = "LoginControl" , urlPatterns = {"/login"})
-public class LoginControl extends HttpServlet {
+@WebServlet("/add")
+public class AddControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginControl() {
+    public AddControl() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +31,20 @@ public class LoginControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		
-		String userName = request.getParameter("user");
-		String password = request.getParameter("pass");
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("name");
+		String image = request.getParameter("image");
+		String price = request.getParameter("price");
+		String title = request.getParameter("title");
+		String description = request.getParameter("description");
+		String category = request.getParameter("category");
+		HttpSession session = request.getSession();
+		Account acc = (Account) session.getAttribute("accSession");	
+		int sid = acc.getId();
 		
 		DAO dao = new DAO();
-		Account acc = dao.login(userName,password);
-		
-		if(acc == null) {
-			request.setAttribute("mess","Wrong user or password");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-		}else {
-			HttpSession session = request.getSession();
-			session.setAttribute("accSession", acc);			
-			response.sendRedirect("home");
-		}
+		dao.insertProduct(name, image, price, title, description, category, sid);	
+		response.sendRedirect("manager");	
 	}
 
 	/**
