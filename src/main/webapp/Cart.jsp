@@ -65,12 +65,12 @@
 													</div>
 												</th>
 												<td class="align-middle"><strong>${o.price}</strong></td>
-												<td class="align-middle"><a href="#">
+												<td class="align-middle"><a href="sub?pid=${o.id}">
 														<button class="btnSub">-</button>
-												</a> <strong>${o.amount}</strong> <a href="#"><button
+												</a> <strong>${o.amount}</strong> <a href="sub?pid=${o.id}"><button
 															class="btnAdd">+</button></a></td>
 
-												<td class="align-middle"><a href="del?pid=${o.id}"
+												<td class="align-middle"><a href="show?pid=${o.id}"
 													class="text-dark">
 														<button type="button" class="btn btn-danger">Delete</button>
 												</a></td>

@@ -3,6 +3,7 @@ package control;
 
 import java.io.IOException;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -54,7 +55,7 @@ public class CartControl extends HttpServlet {
 		response.addCookie(c);
 		response.sendRedirect("show");
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -66,6 +67,7 @@ public class CartControl extends HttpServlet {
 		
 		
 	}
+	
 	
 
 
