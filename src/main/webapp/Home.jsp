@@ -34,7 +34,7 @@
                                                 <p class="btn btn-danger btn-block">${o.price} $</p>
                                             </div>
                                             <div class="col">
-                                                <a href="cart?id=${o.id}" class="btn btn-success btn-block">Add to cart</a>
+                                                <a href="show?id=${o.id}" class="btn btn-success btn-block">Add to cart</a>
                                             </div>
                                         </div>
                                     </div>

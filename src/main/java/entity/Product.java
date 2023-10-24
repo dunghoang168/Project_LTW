@@ -16,8 +16,10 @@ public class Product {
     private double price;
     private String title;
     private String description;
-    private int amount = 1;
-
+    private int amount;
+    
+    
+    
 	public int getAmount() {
 		return amount;
 	}

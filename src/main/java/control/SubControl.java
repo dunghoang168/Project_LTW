@@ -1,17 +1,14 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.DAO;
 import entity.Product;
 
 /**
@@ -33,16 +30,36 @@ public class SubControl extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		DAO dao = new DAO();
-//		String pid = request.getParameter("pid");
-//		Product  product = dao.getProductByID(pid);
-//		
-//		product.setAmount(product.getAmount()+1);
-//		
-//		
-//	
-//		
-//		request.getRequestDispatcher("show").forward(request, response);
+		response.setContentType("text/html;charset=UTF-8");
+		try (PrintWriter out = response.getWriter()) {
+			String action = request.getParameter("action");
+			int id = Integer.parseInt(request.getParameter("id"));
+			ArrayList<Product> cart_list = (ArrayList<Product>) request.getSession().getAttribute("list");
+
+			if (action != null && id >= 1) {
+				if (action.equals("add")) {
+					for (Product c : cart_list) {
+						if (c.getId() == id) {
+							c.setAmount(c.getAmount()+1);
+							response.sendRedirect("Cart.jsp");
+						}
+					}
+				}
+
+				if (action.equals("s")) {
+					for (Product c : cart_list) {
+						if (c.getId() == id && c.getAmount() > 1) {
+							c.setAmount(c.getAmount()-1);
+							break;
+						}
+					}
+					response.sendRedirect("Cart.jsp");
+				}
+			} else {
+				response.sendRedirect("Cart.jsp");
+			}
+		}
+	
 	}
 
 	/**
@@ -52,4 +69,5 @@ public class SubControl extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

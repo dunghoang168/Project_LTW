@@ -1,14 +1,14 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.DAO;
 import entity.Product;
 
 /**
@@ -30,18 +30,27 @@ public class DeleteCartControl extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Cookie arr[] = request.getCookies();
-//		String  id =  request.getParameter("id");
-//		if(id != null) {
-//			for (Cookie o : arr) {
-//                if (o.getName().compareTo("id") == 2) {
-//                    o.setMaxAge(0);
-//                    response.addCookie(o);  
-//                   
-//                }       
-//			}		
-//		}
-//		request.getRequestDispatcher("show").forward(request, response);
+		response.setContentType("text/html;charset=UTF-8");
+		try (PrintWriter out = response.getWriter()) {
+			String id = request.getParameter("id");
+			if (id != null) {
+				ArrayList<Product> cart_list = (ArrayList<Product>) request.getSession().getAttribute("list");
+				if (cart_list != null) {
+					for (Product c : cart_list) {
+						if (c.getId() == Integer.parseInt(id)) {
+							cart_list.remove(cart_list.indexOf(c));
+							break;
+						}
+					}
+				}
+				response.sendRedirect("Cart.jsp");
+
+			} else {
+				response.sendRedirect("Cart.jsp");
+			}
+
+		}
+	
 	}
 
 	/**
