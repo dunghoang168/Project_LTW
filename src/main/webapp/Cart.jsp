@@ -50,6 +50,7 @@
 										</tr>
 									</thead>
 									<tbody>
+									
 										<c:forEach items="${list}" var="o">
 											<tr>
 												<th scope="row">
@@ -65,12 +66,12 @@
 													</div>
 												</th>
 												<td class="align-middle"><strong>${o.price}</strong></td>
-												<td class="align-middle"><a href="#">
+												<td class="align-middle"><a href="sub?action=s&id=${o.id}">
 														<button class="btnSub">-</button>
-												</a> <strong>${o.amount}</strong> <a href="#"><button
+												</a> <strong>${o.amount}</strong> <a href="sub?action=add&id=${o.id}"><button
 															class="btnAdd">+</button></a></td>
 
-												<td class="align-middle"><a href="del?pid=${o.id}"
+												<td class="align-middle"><a href="delCart?id=${o.id}"
 													class="text-dark">
 														<button type="button" class="btn btn-danger">Delete</button>
 												</a></td>
